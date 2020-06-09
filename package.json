@@ -1,0 +1,25 @@
+{
+  "name": "how-outdated",
+  "version": "0.1.0",
+  "description": "npx how-outdated",
+  "main": "index.js",
+  "bin": {
+    "how-outdated": "./index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/larsthorup/node-how-outdated.git"
+  },
+  "author": "Lars Thorup <lars@zealake.com> (https://www.zealake.com/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/larsthorup/node-how-outdated/issues"
+  },
+  "homepage": "https://github.com/larsthorup/node-how-outdated#readme",
+  "dependencies": {
+    "mocha": "^7.0.1"
+  }
+}
