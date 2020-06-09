@@ -1,6 +1,6 @@
 {
   "name": "how-outdated",
-  "version": "0.1.1",
+  "version": "1.0.0",
   "description": "npx how-outdated",
   "main": "index.js",
   "bin": {
@@ -19,7 +19,5 @@
     "url": "https://github.com/larsthorup/node-how-outdated/issues"
   },
   "homepage": "https://github.com/larsthorup/node-how-outdated#readme",
-  "dependencies": {
-    "mocha": "^7.0.1"
-  }
+  "dependencies": {}
 }
