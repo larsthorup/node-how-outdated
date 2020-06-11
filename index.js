@@ -4,7 +4,7 @@ const { exec } = require("child_process");
 const executing = promisify(exec);
 
 async function main() {
-  process.stdout.write(".");
+  const isJson = process.argv[2] === "--json";
   const { stdout: outdatedStdout } = await new Promise((resolve) => {
     exec("npm outdated --json", (err, stdout) => {
       if (err) {
@@ -14,10 +14,9 @@ async function main() {
       }
     });
   });
+  const packages = {};
   const outdated = JSON.parse(outdatedStdout);
-  const howOutdated = [];
   for (packageName of Object.keys(outdated)) {
-    process.stdout.write(".");
     const outdatedPackage = outdated[packageName];
     const { stdout: viewStdout } = await executing(
       `npm view ${packageName} --json`
@@ -28,27 +27,22 @@ async function main() {
     const agePackage = Math.trunc(
       (Date.now() - Date.parse(currentPackageDate)) / (24 * 60 * 60 * 1000)
     );
-    howOutdated.push({
-      agePackage,
-      packageName,
-      currentPackageVersion,
-      currentPackageDate,
-    });
+    packages[packageName] = {
+      currentAge: agePackage,
+      currentDate: currentPackageDate,
+      ...outdatedPackage,
+    };
+    if (!isJson) {
+      console.log(
+        agePackage,
+        packageName,
+        currentPackageVersion,
+        currentPackageDate
+      );
+    }
   }
-  process.stdout.write("\n");
-  howOutdated.sort((a, b) => (a.agePackage < b.agePackage ? +1 : -1));
-  for ({
-    agePackage,
-    packageName,
-    currentPackageVersion,
-    currentPackageDate,
-  } of howOutdated) {
-    console.log(
-      agePackage,
-      packageName,
-      currentPackageVersion,
-      currentPackageDate
-    );
+  if (isJson) {
+    process.stdout.write(JSON.stringify(packages, null, 2));
   }
 }
 
