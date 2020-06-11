@@ -1,6 +1,6 @@
 # node-how-outdated
 
-Display outdated dependencies in a project, sorted by descending age of current version of each outdated package. Note that up-to-date dependencies are not listed.
+Display age of outdated dependencies in a project. Note that up-to-date dependencies are not listed.
 
 ```
 npx how-outdated
